@@ -11,7 +11,6 @@ mars_map = Matrix()
 mars_map.open()
 mars_map.edit()
 mars_map.save()
-mars_map.get_matrix()
 
 map_pixel = mars_map.size()
 
@@ -30,8 +29,9 @@ clock = pygame.time.Clock()
 done = False
 run = False
 can_change = True
+generate_ants = True
 map_path = mars_map.rendered_map
-# bg = pygame.image.load(map_path).convert()
+bg = pygame.image.load(map_path).convert()
 board = Board(matrix=mars_map.matrix, screen=screen)
 board.backup()
 
@@ -39,7 +39,6 @@ clock = pygame.time.Clock()
 start_point = None
 end_point = None
 
-# board.draw()
 
 while not done:
     for event in pygame.event.get():
@@ -50,7 +49,7 @@ while not done:
                 run = not run
                 can_change = False
 
-    # screen.blit(bg, [0, 0])
+    screen.blit(bg, [0, 0])
 
     key = pygame.key.get_pressed()
     mouse = pygame.mouse.get_pressed()
@@ -79,9 +78,17 @@ while not done:
         end_point.draw()
 
     if not can_change:
-        board.generate_ants(MAX_ANTS)
+        board.draw_ants()
+        if run:
+            board.move_ants()
+            if generate_ants:
+                board.generate_ants(
+                        start_point.location,
+                        end_point.location,
+                        MAX_ANTS)
+                generate_ants = False
 
-    board.draw()
+    # board.draw()
 
     pygame.display.flip()
 

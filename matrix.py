@@ -20,7 +20,7 @@ class Matrix:
 
     def edit(self):
         self.image = self.image.filter(ImageFilter.FIND_EDGES)
-        # self.image = self.image.convert('L')
+        self.image = self.image.convert('L').convert('RGBA')
 
         self.matrix = np.asarray(self.image).copy()
 

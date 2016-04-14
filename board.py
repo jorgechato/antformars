@@ -17,12 +17,19 @@ class Board:
     def draw(self):
         for x, raw in enumerate(self.matrix):
             for y, pixel in enumerate(raw):
-                # print raw
-                # pass
-                # print "color: {} x: {} y: {}".format(pixel, x, y)
-                # import pdb; pdb.set_trace()
-                self.screen.blit((0, 255, 0), (x, y))
+                pass
 
-    def generate_ants(self, number=500):
-        for i in range(number):
-            self.ant_list.append(Ant(location=self.location))
+    def generate_ants(self, location, end_point, number_of_ants=500):
+        for i in range(number_of_ants):
+            self.ant_list.append(Ant(
+                location=location,
+                end_pint=end_point,
+                screen=self.screen))
+
+    def draw_ants(self):
+        for ant in self.ant_list:
+            ant.draw()
+
+    def move_ants(self):
+        for ant in self.ant_list:
+            ant.move()
