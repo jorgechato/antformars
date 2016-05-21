@@ -77,7 +77,7 @@ while not done:
     if end_point is not None:
         end_point.draw()
 
-    if not can_change:
+    if not can_change and start_point and end_point:
         board.draw_ants()
         if run:
             board.move_ants()

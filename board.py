@@ -23,7 +23,7 @@ class Board:
         for i in range(number_of_ants):
             self.ant_list.append(Ant(
                 location=location,
-                end_pint=end_point,
+                end_point=end_point,
                 screen=self.screen))
 
     def draw_ants(self):
